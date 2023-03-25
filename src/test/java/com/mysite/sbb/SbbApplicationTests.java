@@ -1,5 +1,9 @@
 package com.mysite.sbb;
 
+import com.mysite.sbb.answer.Answer;
+import com.mysite.sbb.answer.AnswerRepository;
+import com.mysite.sbb.question.Question;
+import com.mysite.sbb.question.QuestionRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -165,5 +169,21 @@ class SbbApplicationTests {
 		assertEquals(2, a.getQuestion().getId());
 	}
 
+	@Transactional
+	@Test
+	@DisplayName("질문에 달린 답변 찾기")
+	void t011(){
+		Optional<Question> oq = questionRepository.findById(2);
+		assertTrue(oq.isPresent());
+		Question q = oq.get();
+
+		List<Answer> answerList = q.getAnswerList();
+
+		assertEquals(1, answerList.size());
+		assertEquals("네 자동으로 생성됩니다.", answerList.get(0).getContent());
+	}
 
 }
+
+
+
