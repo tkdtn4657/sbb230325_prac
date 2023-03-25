@@ -26,9 +26,14 @@ class SbbApplicationTests {
 
 	@BeforeEach // 아래 메서드는 각 테스트케이스가 실행되기 전 실행
 	void beforeEach(){
+		//삭제할거면 answer부터 삭제해야한다. 물론 cascade로 인해서 삭제는 될테지만
+
+		answerRepository.deleteAll();
+		answerRepository.clearAutoIncrement();
+
 		questionRepository.deleteAll();
 
-		questionRepository.clearAutoIncrement(1);
+		questionRepository.clearAutoIncrement();
 
 
 		Question q1 = new Question();
@@ -42,6 +47,12 @@ class SbbApplicationTests {
 		q2.setContent("id는 자동으로 생성되나요?");
 		q2.setCreateDate(LocalDateTime.now());
 		questionRepository.save(q2);
+
+		Answer a1 = new Answer();
+		a1.setContent("네 자동으로 생성됩니다.");
+		a1.setQuestion(q2);
+		a1.setCreateDate(LocalDateTime.now());
+		answerRepository.save(a1);
 
 	}
 
@@ -127,5 +138,30 @@ class SbbApplicationTests {
 		answerRepository.save(a);
 
 	}
+
+	@Test
+	@DisplayName("답변 데이터 생성 후 저장하기")
+	void t009(){
+		Optional<Question> oq = questionRepository.findById(2);
+		assertTrue(oq.isPresent());
+		Question q = oq.get();
+
+		Answer a = new Answer();
+		a.setContent("네 자동으로 생성됩니다.");
+		a.setQuestion(q);
+		a.setCreateDate(LocalDateTime.now());
+		answerRepository.save(a);
+
+	}
+
+	@Test
+	@DisplayName("답변 조회하기")
+	void t010(){
+		Optional<Answer> oa = answerRepository.findById(1);
+		assertTrue(oa.isPresent());
+		Answer a = oa.get();
+		assertEquals(2, a.getQuestion().getId());
+	}
+
 
 }
