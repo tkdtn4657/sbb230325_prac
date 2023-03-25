@@ -54,6 +54,8 @@ class SbbApplicationTests {
 		a1.setCreateDate(LocalDateTime.now());
 		answerRepository.save(a1);
 
+		q2.getAnswerList().add(a1);
+
 	}
 
 

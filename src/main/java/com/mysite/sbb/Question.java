@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -30,5 +31,6 @@ public class Question {
     //OneToMany 자바세상에서의 편의를 위해 필드 생성
     // 이 녀석은 실제 DB 테이블에 칼럼이 생성되지 않음
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
-    private List<Answer> answerList;
+    //OneToMany 에는 직접 객체 초기화
+    private List<Answer> answerList = new ArrayList<>();
 }
