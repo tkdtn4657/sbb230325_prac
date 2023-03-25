@@ -20,8 +20,9 @@ public class Answer {
 
     private LocalDateTime createDate;
 
+    @ManyToOne
+    private Question question;
 
-    private Integer questionId;
 
 
 }
