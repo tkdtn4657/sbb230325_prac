@@ -13,13 +13,14 @@ import org.springframework.web.bind.annotation.*;
 public class AnswerController {
 
     private final QuestionService questionService;
+    private final AnswerService answerService;
 
     @PostMapping("/create/{id}")
     public String createAnswer(Model model, @PathVariable Integer id,@RequestParam String content){
         // 관련 질문을 얻어온다.
         Question question = questionService.getQuestion(id);
 
-        // TODO : 답변 객체를 만든다.
+        answerService.create(question, content);
 
         return "redirect:/question/detail/%s".formatted(id);
     }
