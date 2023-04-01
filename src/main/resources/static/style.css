@@ -1,7 +1,17 @@
-textarea {
-    width:100%;
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
-input[type=submit] {
-    margin-top:10px;
+html > body {
+    padding:10px;
+    font-family: "GmarketSansMedium";
+    text-underline-position: under;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
 }
