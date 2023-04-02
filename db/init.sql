@@ -10,3 +10,6 @@ TRUNCATE question;
 
 SET FOREIGN_KEY_CHECKS = 1;
 
+SHOW TABLES
+
+DESC site_user

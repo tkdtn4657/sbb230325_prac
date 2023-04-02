@@ -16,11 +16,14 @@
         </thead>
         <tbody>
         <tr th:each="question, loop : ${paging}">
-            <td>
-                <a th:text="${loop.count}" th:href="@{|/question/detail/${question.id}|}"></a>
-            </td>
+            <td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
+
             <td>
                 <a th:text="${question.subject}" th:href="@{|/question/detail/${question.id}|}"></a>
+                <span class="text-danger small ms-2"
+                      th:if="${#lists.size(question.answerList) > 0}"
+                      th:text="${#lists.size(question.answerList)}">
+            </span>
             </td>
             <td th:text="${question.createDate}"></td>
         </tr>
